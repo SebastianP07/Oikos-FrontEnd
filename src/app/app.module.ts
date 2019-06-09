@@ -45,10 +45,26 @@ import {
   MatTreeModule,
   
 } from '@angular/material';
+import { AddressFormComponent } from './main/address-form/address-form.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { NavegacionComponent } from './main/navegacion/navegacion.component';
+import { LayoutModule } from '@angular/cdk/layout';
+import { TableComponent } from './main/table/table.component';
+import { DashboardComponent } from './main/dashboard/dashboard.component';
+import { TreeComponent } from './main/tree/tree.component';
+import { DragDropComponent } from './main/drag-drop/drag-drop.component';
+import { HeaderComponent } from './main/header/header.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    AddressFormComponent,
+    NavegacionComponent,
+    TableComponent,
+    DashboardComponent,
+    TreeComponent,
+    DragDropComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
@@ -93,6 +109,8 @@ import {
     MatTooltipModule,
     MatTreeModule,
     ScrollingModule,
+    ReactiveFormsModule,
+    LayoutModule,
     
   ],
   providers: [],
