@@ -1,119 +1,85 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import { AppRoutingModule } from './app-routing.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { OverlayContainer } from '@angular/cdk/overlay';
+import { CustomOverlayContainer } from './theme/utils/custom-overlay-container';
+
+import { AgmCoreModule } from '@agm/core';
+import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
+import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
+import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
+const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
+  wheelPropagation: true,
+  suppressScrollX: true               
+};
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { SharedModule } from './shared/shared.module';
+import { PipesModule } from './theme/pipes/pipes.module';
+import { routing } from './app.routing';
+
 import { AppComponent } from './app.component';
-import {DragDropModule} from '@angular/cdk/drag-drop';
-import {ScrollingModule} from '@angular/cdk/scrolling';
-import {CdkTableModule} from '@angular/cdk/table';
-import {CdkTreeModule} from '@angular/cdk/tree';
-import {
-  MatAutocompleteModule,
-  MatBadgeModule,
-  MatBottomSheetModule,
-  MatButtonModule,
-  MatButtonToggleModule,
-  MatCardModule,
-  MatCheckboxModule,
-  MatChipsModule,
-  MatDatepickerModule,
-  MatDialogModule,
-  MatDividerModule,
-  MatExpansionModule,
-  MatGridListModule,
-  MatIconModule,
-  MatInputModule,
-  MatListModule,
-  MatMenuModule,
-  MatNativeDateModule,
-  MatPaginatorModule,
-  MatProgressBarModule,
-  MatProgressSpinnerModule,
-  MatRadioModule,
-  MatRippleModule,
-  MatSelectModule,
-  MatSidenavModule,
-  MatSliderModule,
-  MatSlideToggleModule,
-  MatSnackBarModule,
-  MatSortModule,
-  MatStepperModule,
-  MatTableModule,
-  MatTabsModule,
-  MatToolbarModule,
-  MatTooltipModule,
-  MatTreeModule,
-  
-} from '@angular/material';
-import { AddressFormComponent } from './main/address-form/address-form.component';
-import { ReactiveFormsModule } from '@angular/forms';
-import { NavegacionComponent } from './main/navegacion/navegacion.component';
-import { LayoutModule } from '@angular/cdk/layout';
-import { TableComponent } from './main/table/table.component';
-import { DashboardComponent } from './main/dashboard/dashboard.component';
-import { TreeComponent } from './main/tree/tree.component';
-import { DragDropComponent } from './main/drag-drop/drag-drop.component';
-import { HeaderComponent } from './main/header/header.component';
+import { PagesComponent } from './pages/pages.component';
+import { BlankComponent } from './pages/blank/blank.component';
+import { SearchComponent } from './pages/search/search.component';
+import { NotFoundComponent } from './pages/errors/not-found/not-found.component';
+import { ErrorComponent } from './pages/errors/error/error.component';
+import { AppSettings } from './app.settings';
+
+import { SidenavComponent } from './theme/components/sidenav/sidenav.component';
+import { VerticalMenuComponent } from './theme/components/menu/vertical-menu/vertical-menu.component';
+import { HorizontalMenuComponent } from './theme/components/menu/horizontal-menu/horizontal-menu.component';
+import { BreadcrumbComponent } from './theme/components/breadcrumb/breadcrumb.component';
+import { FlagsMenuComponent } from './theme/components/flags-menu/flags-menu.component';
+import { FullScreenComponent } from './theme/components/fullscreen/fullscreen.component';
+import { ApplicationsComponent } from './theme/components/applications/applications.component';
+import { MessagesComponent } from './theme/components/messages/messages.component';
+import { UserMenuComponent } from './theme/components/user-menu/user-menu.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    AddressFormComponent,
-    NavegacionComponent,
-    TableComponent,
-    DashboardComponent,
-    TreeComponent,
-    DragDropComponent,
-    HeaderComponent
-  ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    CdkTableModule,
-    CdkTreeModule,
-    DragDropModule,
-    MatAutocompleteModule,
-    MatBadgeModule,
-    MatBottomSheetModule,
-    MatButtonModule,
-    MatButtonToggleModule,
-    MatCardModule,
-    MatCheckboxModule,
-    MatChipsModule,
-    MatStepperModule,
-    MatDatepickerModule,
-    MatDialogModule,
-    MatDividerModule,
-    MatExpansionModule,
-    MatGridListModule,
-    MatIconModule,
-    MatInputModule,
-    MatListModule,
-    MatMenuModule,
-    MatNativeDateModule,
-    MatPaginatorModule,
-    MatProgressBarModule,
-    MatProgressSpinnerModule,
-    MatRadioModule,
-    MatRippleModule,
-    MatSelectModule,
-    MatSidenavModule,
-    MatSliderModule,
-    MatSlideToggleModule,
-    MatSnackBarModule,
-    MatSortModule,
-    MatTableModule,
-    MatTabsModule,
-    MatToolbarModule,
-    MatTooltipModule,
-    MatTreeModule,
-    ScrollingModule,
+    BrowserAnimationsModule,     
+    FormsModule, 
     ReactiveFormsModule,
-    LayoutModule,
-    
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyAAYi6itRZ0rPgI76O3I83BhhzZHIgMwPg'
+    }), 
+    PerfectScrollbarModule, 
+    CalendarModule.forRoot({
+      provide: DateAdapter,
+      useFactory: adapterFactory
+    }),
+    SharedModule,
+    PipesModule,
+    routing
   ],
-  providers: [],
+  declarations: [
+    AppComponent,
+    PagesComponent,
+    BlankComponent,
+    SearchComponent,
+    NotFoundComponent,
+    ErrorComponent,
+    SidenavComponent,
+    VerticalMenuComponent,
+    HorizontalMenuComponent,
+    BreadcrumbComponent,
+    FlagsMenuComponent,
+    FullScreenComponent,
+    ApplicationsComponent,
+    MessagesComponent,
+    UserMenuComponent
+  ],
+  entryComponents:[
+    VerticalMenuComponent
+  ],
+  providers: [ 
+    AppSettings,
+    { provide: PERFECT_SCROLLBAR_CONFIG, useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG },
+    { provide: OverlayContainer, useClass: CustomOverlayContainer }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
