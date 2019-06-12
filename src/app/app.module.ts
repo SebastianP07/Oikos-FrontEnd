@@ -1,3 +1,4 @@
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -36,6 +37,8 @@ import { FullScreenComponent } from './theme/components/fullscreen/fullscreen.co
 import { ApplicationsComponent } from './theme/components/applications/applications.component';
 import { MessagesComponent } from './theme/components/messages/messages.component';
 import { UserMenuComponent } from './theme/components/user-menu/user-menu.component';
+import { DashboardEstudianteComponent } from './Estudiantes/dashboard-estudiante.component';
+import { DashboardPadrinoComponent } from './Padrinos/dashboard-padrino.component';
 
 @NgModule({
   imports: [
@@ -53,7 +56,8 @@ import { UserMenuComponent } from './theme/components/user-menu/user-menu.compon
     }),
     SharedModule,
     PipesModule,
-    routing
+    routing,    
+    NgxDatatableModule
   ],
   declarations: [
     AppComponent,
@@ -70,7 +74,9 @@ import { UserMenuComponent } from './theme/components/user-menu/user-menu.compon
     FullScreenComponent,
     ApplicationsComponent,
     MessagesComponent,
-    UserMenuComponent
+    UserMenuComponent,
+    DashboardEstudianteComponent,
+    DashboardPadrinoComponent
   ],
   entryComponents:[
     VerticalMenuComponent
