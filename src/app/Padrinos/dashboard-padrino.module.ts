@@ -9,7 +9,8 @@ import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
-import { UsersData } from '../pages/users/users.data';
+
+import { PadrinoData } from '../Data/padrinos.data';
 
 export const routes = [
   { path: '', component: DashboardPadrinoComponent, pathMatch: 'full' }
@@ -22,7 +23,7 @@ export const routes = [
     RouterModule.forChild(routes),
     FormsModule,
     ReactiveFormsModule,
-    InMemoryWebApiModule.forRoot(UsersData, { delay: 500 }),
+    InMemoryWebApiModule.forRoot(PadrinoData, { delay: 500 }),
     NgxPaginationModule,
     SharedModule,
     PipesModule

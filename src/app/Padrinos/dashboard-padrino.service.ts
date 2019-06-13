@@ -1,27 +1,27 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { User } from './user.model';
+import { Padrino } from '../Modelo/dashboard-padrino.model';
 
 @Injectable ()
 export class DashboardPadrinoService {
 
-  public url = "api/users";
-  constructor(public http:HttpClient) { }
-  
-  getUsers(): Observable<User[]> {
-      return this.http.get<User[]>(this.url);
+  public url = 'api/padrinos';
+  constructor(public http: HttpClient) { }
+
+  getPadrinos(): Observable<Padrino[]> {
+      return this.http.get<Padrino[]>(this.url);
   }
 
-  addUser(user:User){	    
-      return this.http.post(this.url, user);
+  addPadrino(user: Padrino) {
+      return this.http.post(this.url, Padrino);
   }
 
-  updateUser(user:User){
+  updatePadrino(user: Padrino) {
       return this.http.put(this.url, user);
   }
 
-  deleteUser(id: number) {
-      return this.http.delete(this.url + "/" + id);
-  } 
+  deletePadrino(id: string) {
+      return this.http.delete(this.url + '/' + id);
+  }
 }

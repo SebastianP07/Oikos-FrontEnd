@@ -7,6 +7,7 @@ import { SearchComponent } from './pages/search/search.component';
 import { NotFoundComponent } from './pages/errors/not-found/not-found.component';
 import { ErrorComponent } from './pages/errors/error/error.component';
 import { DashboardEstudianteComponent } from './Estudiantes/dashboard-estudiante.component';
+import { DashboardPadrinoComponent } from './Padrinos/dashboard-padrino.component';
 
 export const routes: Routes = [
     { 
@@ -28,6 +29,7 @@ export const routes: Routes = [
             { path: 'profile', loadChildren: () => import ('./pages/profile/profile.module').then(m => m.ProfileModule), data: { breadcrumb: 'Profile' } }, 
             { path: 'blank', component: BlankComponent, data: { breadcrumb: 'Blank page' } },
             { path: 'DashboardEstudainte', component: DashboardEstudianteComponent, data: { breadcrumb: 'Dashboard' } },
+            { path: 'DashboardPadrino', component: DashboardPadrinoComponent, data: { breadcrumb: 'Dashboard' } },
             { path: 'search', component: SearchComponent, data: { breadcrumb: 'Search' } }
         ]
     },

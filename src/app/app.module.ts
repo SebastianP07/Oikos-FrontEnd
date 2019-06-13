@@ -39,11 +39,15 @@ import { MessagesComponent } from './theme/components/messages/messages.componen
 import { UserMenuComponent } from './theme/components/user-menu/user-menu.component';
 import { DashboardEstudianteComponent } from './Estudiantes/dashboard-estudiante.component';
 import { DashboardPadrinoComponent } from './Padrinos/dashboard-padrino.component';
+import { DashboardPadrinoService } from './Padrinos/dashboard-padrino.service';
+
+import { HttpClientModule } from '@angular/common/http';
+
 
 @NgModule({
   imports: [
     BrowserModule,
-    BrowserAnimationsModule,     
+    BrowserAnimationsModule,
     FormsModule, 
     ReactiveFormsModule,
     AgmCoreModule.forRoot({
@@ -56,8 +60,9 @@ import { DashboardPadrinoComponent } from './Padrinos/dashboard-padrino.componen
     }),
     SharedModule,
     PipesModule,
-    routing,    
-    NgxDatatableModule
+    routing,
+    NgxDatatableModule,
+    HttpClientModule
   ],
   declarations: [
     AppComponent,
@@ -81,10 +86,11 @@ import { DashboardPadrinoComponent } from './Padrinos/dashboard-padrino.componen
   entryComponents:[
     VerticalMenuComponent
   ],
-  providers: [ 
+  providers: [
     AppSettings,
     { provide: PERFECT_SCROLLBAR_CONFIG, useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG },
-    { provide: OverlayContainer, useClass: CustomOverlayContainer }
+    { provide: OverlayContainer, useClass: CustomOverlayContainer },
+    DashboardPadrinoService
   ],
   bootstrap: [AppComponent]
 })

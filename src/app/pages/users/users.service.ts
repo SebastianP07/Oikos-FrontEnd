@@ -6,7 +6,7 @@ import { User } from './user.model';
 @Injectable()
 export class UsersService {
     public url = "api/users";
-    constructor(public http:HttpClient) { }
+    constructor(public http: HttpClient) { }
     
     getUsers(): Observable<User[]> {
         return this.http.get<User[]>(this.url);
