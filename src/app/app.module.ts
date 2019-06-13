@@ -80,8 +80,7 @@ import { HttpClientModule } from '@angular/common/http';
     ApplicationsComponent,
     MessagesComponent,
     UserMenuComponent,
-    DashboardEstudianteComponent,
-    DashboardPadrinoComponent
+    DashboardEstudianteComponent
   ],
   entryComponents:[
     VerticalMenuComponent

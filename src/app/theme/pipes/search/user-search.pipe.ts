@@ -5,12 +5,12 @@ export class UserSearchPipe implements PipeTransform {
   transform(value, args?): Array<any> {
     let searchText = new RegExp(args, 'ig');
     if (value) {
-      return value.filter(user => {
-        if (user.profile.name) {
-          return user.profile.name.search(searchText) !== -1;
+      return value.filter(padrino => {
+        if (padrino.PrimerNombre) {
+          return padrino.PrimerNombre.search(searchText) !== -1;
         }
         else{
-          return user.username.search(searchText) !== -1;
+          return padrino.PrimerNombre.search(searchText) !== -1;
         }
       });
     }

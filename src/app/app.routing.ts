@@ -29,7 +29,8 @@ export const routes: Routes = [
             { path: 'profile', loadChildren: () => import ('./pages/profile/profile.module').then(m => m.ProfileModule), data: { breadcrumb: 'Profile' } }, 
             { path: 'blank', component: BlankComponent, data: { breadcrumb: 'Blank page' } },
             { path: 'DashboardEstudainte', component: DashboardEstudianteComponent, data: { breadcrumb: 'Dashboard' } },
-            { path: 'DashboardPadrino', component: DashboardPadrinoComponent, data: { breadcrumb: 'Dashboard' } },
+            { path: 'padrinos', loadChildren: () => import('./Padrinos/dashboard-padrino.module').then(m => m.DashboardPadrinoModule), data: { breadcrumb: 'Padrino' } },
+
             { path: 'search', component: SearchComponent, data: { breadcrumb: 'Search' } }
         ]
     },
