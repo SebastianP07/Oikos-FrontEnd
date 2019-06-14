@@ -3,26 +3,46 @@ import { Padrino } from '../Modelo/dashboard-padrino.model';
 export class PadrinoData implements InMemoryDbService {
   createDb() {
     const padrinos = [
-        {
-            TipoIdentificacion: 'CC',
-            NumeroIdentificacion: '1022347504',
-            LugarExpedicion: '111011',
-            PrimerNombre: 'John',
-            SegundoNombre: 'Alberto',
-            PrimerApellido: 'López',
-            SegundoApellido: 'Hernández',
-            FechaNacimiento: new Date(1988, 4, 23),
-            LugarNacimiento: '111011',
-            Edad: 23,
-            Genero: 'M',
-            CorreoElectronico: 'johnalbh@gmail.cm',
-            CorreoElectronicoAlternativo: 'johnalbh@hotmail.cm',
-            Telefono: '3002995465',
-            OtroTelefono: '14324000',
-            UrlFoto: 'https://amarillo.blob.core.windows.net/foto/31009.jpg',
-            Estado: 1,
-            UsuarioLog: 'john.lopez@sgs.edu.co'
+      {
+        tipoIdentificacion: 'CC',
+        numeroIdentificacion: '1022347504',
+        perfilPadrino: {
+            primerNombre: 'John',
+            segundoNombre: 'Alberto',
+            primerApellido: 'López',
+            segundoApellido: 'Hernández',
+            fechaNacimiento: new Date(1988,4,23),
+            lugarNacimiento: 'Cienaga',
+            genero: 'Masculino',
+            urlFoto: 'https://amarillo.blob.core.windows.net/foto/1022347504.jpg'
         },
+        profesionTrabajo: {
+            empresa: 'Colegio San Jorge de Inglaterra',
+            cargo: 'Desarrollador de Aplicaciones',
+            profesion: 'Ingeniero de Sistemas'
+        },
+        datosContacto:{
+          correoElectronico: 'john.lopez@sgs.edu.co',
+          correoElectronicoAlternativo: 'johnalbh@gmail.com',
+          telefono: '573002995465',
+          otroTelefono: '13030569',
+          direccionResidencia: 'Calle 98C 70C 38 Apto 302 int 5'
+        },
+        redesSociales: {
+            facebook: 'johnalbh',
+            twitter: 'johnalbh',
+            google: ''
+        },
+        estados:{
+            estado: 'Activo',
+            estaActivo: true,
+            estaEliminado: false,
+            fechaRegistro: "2012-10-13T12:20:40.511Z",
+        },
+        auditoria:{
+          usuarioLog: 'john.lopez@cigarra.org'
+      },
+    },
     ];
     return {padrinos};
   }

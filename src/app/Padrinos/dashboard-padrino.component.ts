@@ -40,7 +40,7 @@ export class DashboardPadrinoComponent implements OnInit {
       this.padrinosService.updatePadrino(padrino).subscribe(padrino => this.getPadrinos());
   }
   public deletePadrino(padrino: Padrino){
-     this.padrinosService.deletePadrino(padrino.persona.NumeroIdentificacion).subscribe(user => this.getPadrinos);
+     this.padrinosService.deletePadrino(padrino.numeroIdentificacion).subscribe(user => this.getPadrinos);
   }
 
 

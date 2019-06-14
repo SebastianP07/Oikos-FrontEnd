@@ -1,51 +1,52 @@
-import { Persona } from './persona.model';
-
 export class Padrino {
-  persona: Persona;
-  FechaRegistro: Date;
-  Estado: string;
+  tipoIdentificacion: string;
+  numeroIdentificacion: string;
+  perfilPadrino: DatosbasicosPadrino;
+  profesionTrabajo: TrabajoPadrino;
+  datosContacto: DatosContactoPadrino;
+  redesSociales: RedesSocialesPadrino;
+  estados: EstadosPadrinos;
+  auditoria: DatosAuditoriaPadrino;
 }
 
-export class User {
-  id: number;
-  username: string;
-  password: string;  
-  profile: UserProfile;
-  work: UserWork;
-  contacts: UserContacts;
-  social: UserSocial;
-  settings: UserSettings;
+export class EstadosPadrinos{
+  estado: string;
+  estaActivo: boolean;
+  estaEliminado: boolean;
+  fechaRegistro: Date;
 }
 
-export class UserProfile {  
-  name: string;
-  surname: string;  
-  birthday: Object;
-  gender: string;
-  image: string;
+export class DatosbasicosPadrino {
+  primerNombre: string;
+  segundoNombre: string;
+  primerApellido: string;
+  segundoApellido: string;
+  fechaNacimiento: Object;
+  lugarNacimiento: string;
+  genero: string;
+  urlFoto: string;
 }
 
-export class UserWork {
-  company: string;
-  position: string;
-  salary: number;
+export class TrabajoPadrino {
+  empresa: string;
+  cargo: string;
+  profesion: string;
 }
 
-export class UserContacts{
-  email: string;
-  phone: string;
-  address: string;  
+export class DatosContactoPadrino {
+  correoElectronico: string;
+  correoElectronicoAlternativo: string;
+  telefono: string;
+  otroTelefono: string;
+  direccionResidencia: string;
 }
 
-export class UserSocial {
+export class RedesSocialesPadrino {
   facebook: string;
   twitter: string;
   google: string;
 }
 
-export class UserSettings{
-  isActive: boolean;
-  isDeleted: boolean;
-  registrationDate: Date;
-  joinedDate: Date;
+export class DatosAuditoriaPadrino {
+  usuarioLog: string;
 }
