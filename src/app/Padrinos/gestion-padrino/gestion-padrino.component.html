@@ -96,8 +96,8 @@
             </mat-tab>
             <mat-tab label="Settings" formGroupName="estados">
                 <div fxLayout="column" class="form-field-outer">
-                    <mat-checkbox formControlName="isActive">Active</mat-checkbox>
-                    <mat-checkbox formControlName="isDeleted">Blocked</mat-checkbox>
+                    <mat-checkbox formControlName="estaActivo">Active</mat-checkbox>
+                    <mat-checkbox formControlName="estaEliminado">Blocked</mat-checkbox>
                     <p *ngIf="padrino.numeroIdentificacion"><span>Registration date:</span> <i>{{padrino.estados.fechaRegistro| date:"dd MMMM, yyyy 'at' HH:mm" }}</i></p>  
                 </div>
             </mat-tab>

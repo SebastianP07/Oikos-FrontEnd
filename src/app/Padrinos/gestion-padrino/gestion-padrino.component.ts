@@ -20,14 +20,14 @@ export class GestionPadrinoComponent implements OnInit {
     this.form = this.fb.group({
       tipoIdentificacion: null,
       numeroIdentificacion: null,
-      username: [null, Validators.compose([Validators.required, Validators.minLength(5)])],
-      password: [null, Validators.compose([Validators.required, Validators.minLength(6)])],
+      // username: [null, Validators.compose([Validators.required, Validators.minLength(5)])],
+      // password: [null, Validators.compose([Validators.required, Validators.minLength(6)])],
       datosbasicosPadrino:  this.fb.group({
         primerNombre: null,
         segundoNombre: null,
         primerApellido: null,
         segundoApellido: null,
-        fechaNacimiento: null,
+        fechaNacimiento: null,  
         lugarNacimiento: null,
         genero: null,
         urlFoto: null,
