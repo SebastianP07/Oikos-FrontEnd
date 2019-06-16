@@ -6,7 +6,7 @@ import { Padrino } from '../Modelo/dashboard-padrino.model';
 @Injectable ()
 export class DashboardPadrinoService {
 
-  public url = 'api/padrinos';
+  public url = "api/padrinos";
   constructor(public http: HttpClient) { }
 
   getPadrinos(): Observable<Padrino[]> {
@@ -21,7 +21,7 @@ export class DashboardPadrinoService {
       return this.http.put(this.url, padrino);
   }
 
-  deletePadrino(id: string) {
-      return this.http.delete(this.url + '/' + id);
+  deletePadrino(numeroIdentificacion: string) {
+      return this.http.delete(this.url + '/' + numeroIdentificacion);
   }
 }

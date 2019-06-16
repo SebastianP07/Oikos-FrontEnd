@@ -1,13 +1,12 @@
 import { InMemoryDbService } from 'angular-in-memory-web-api';
-import { Padrino } from '../Modelo/dashboard-padrino.model';
 export class PadrinoData implements InMemoryDbService {
   createDb() {
     const padrinos = [
       {
         tipoIdentificacion: 'CC',
         numeroIdentificacion: '1022347504',
-        username: "johnalbh",
-        password: "123",
+        username: 'johnalbh',
+        password: '1234567',
         perfilPadrino: {
             primerNombre: 'John',
             segundoNombre: 'Alberto',

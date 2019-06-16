@@ -12,7 +12,6 @@ import { DatosbasicosPadrino, TrabajoPadrino, DatosContactoPadrino, RedesSociale
   styleUrls: ['./gestion-padrino.component.scss']
 })
 export class GestionPadrinoComponent implements OnInit {
-  
   public form:FormGroup;
   public passwordHide:boolean = true;
   constructor(public dialogRef: MatDialogRef<GestionPadrinoComponent>,
@@ -63,7 +62,7 @@ export class GestionPadrinoComponent implements OnInit {
   }
 
   ngOnInit() {
-    if(this.padrino){
+    if(this.padrino) {
       this.form.setValue(this.padrino);
     } else {
       this.padrino = new Padrino();

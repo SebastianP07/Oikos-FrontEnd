@@ -27,7 +27,7 @@
 </div>
 
 <div *ngIf="viewType.value == 'grid'" fxLayout="row wrap">    
-    <div *ngFor="let user of users | UserSearchPipe : searchText | paginate: { itemsPerPage: 6, currentPage: page }" fxFlex="100" fxFlex.gt-md="33.3" fxFlex.md="50" class="flex-p"> 
+    <div *ngFor="let user of users  | paginate: { itemsPerPage: 6, currentPage: page }" fxFlex="100" fxFlex.gt-md="33.3" fxFlex.md="50" class="flex-p"> 
         <mat-card class="p-0">  
             <div class="bg-primary" fxLayout="row" fxLayoutAlign="space-between center">
                 <h3 *ngIf="!user.settings.isDeleted" class="user-name">{{user.profile.name}} {{user.profile.surname}}</h3> 
@@ -180,4 +180,3 @@
 <div *ngIf="!users" fxLayout="column" fxLayoutAlign="center center" class="user-spinner">   
     <mat-spinner color="primary"></mat-spinner>    
 </div>
-

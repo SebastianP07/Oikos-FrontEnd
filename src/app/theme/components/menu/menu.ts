@@ -63,7 +63,8 @@ export const verticalMenuItems = [
     new Menu (143, 'Level 4', null, null, 'folder_open', null, true, 142),
     new Menu (144, 'Level 5', null, 'http://themeseason.com', 'link', null, false, 143),
     new Menu (200, 'External Link', null, 'http://themeseason.com', 'open_in_new', '_blank', false, 0),
-    new Menu (201, 'Gestión Menu', '/dynamic-menu', null, 'format_list_bulleted', null, false, 15)
+    new Menu (201, 'Gestión Menu', '/dynamic-menu', null, 'format_list_bulleted', null, false, 15),
+    new Menu (202, 'Users', '/users', null, 'supervisor_account', null, false, 0), 
 ]
 
 export const horizontalMenuItems = [ 

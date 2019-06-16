@@ -31,7 +31,7 @@ export class DashboardPadrinoComponent implements OnInit {
 
   public getPadrinos(): void {
       this.padrinos = null;
-      this.padrinosService.getPadrinos().subscribe(padrinos => this.padrinos = padrinos);    
+      this.padrinosService.getPadrinos().subscribe(padrinos => this.padrinos = padrinos);  
   }
   public addPadrino(padrino: Padrino){
       this.padrinosService.addPadrino(padrino).subscribe(padrino => this.getPadrinos());
@@ -40,7 +40,7 @@ export class DashboardPadrinoComponent implements OnInit {
       this.padrinosService.updatePadrino(padrino).subscribe(padrino => this.getPadrinos());
   }
   public deletePadrino(padrino: Padrino){
-     this.padrinosService.deletePadrino(padrino.numeroIdentificacion).subscribe(user => this.getPadrinos);
+     this.padrinosService.deletePadrino(padrino.numeroIdentificacion).subscribe(user => this.getPadrinos());
   }
 
 
@@ -55,7 +55,6 @@ export class DashboardPadrinoComponent implements OnInit {
   }
 
   public openUserDialog(padrino){
-      // tslint:disable-next-line:prefer-const
       let dialogRef = this.dialog.open(GestionPadrinoComponent, {
           data: padrino
       });

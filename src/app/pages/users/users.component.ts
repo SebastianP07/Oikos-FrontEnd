@@ -11,7 +11,7 @@ import { UserDialogComponent } from './user-dialog/user-dialog.component';
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.scss'],
   encapsulation: ViewEncapsulation.None,
-  providers: [ UsersService ]  
+  providers: [ UsersService ]
 })
 export class UsersComponent implements OnInit {
     public users: User[];
