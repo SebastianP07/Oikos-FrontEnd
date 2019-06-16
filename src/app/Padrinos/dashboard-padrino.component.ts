@@ -60,9 +60,9 @@ export class DashboardPadrinoComponent implements OnInit {
           data: padrino
       });
 
-      dialogRef.afterClosed().subscribe(user => {
+      dialogRef.afterClosed().subscribe(padrino => {
           if (padrino){
-              (user.id) ? this.updatePadrino(padrino) : this.addPadrino(padrino);
+              (padrino.numeroIdentificacion && padrino.tipoIdentificacion) ? this.updatePadrino(padrino) : this.addPadrino(padrino);
           }
       });
   }

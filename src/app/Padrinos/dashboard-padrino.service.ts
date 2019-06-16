@@ -13,12 +13,12 @@ export class DashboardPadrinoService {
       return this.http.get<Padrino[]>(this.url);
   }
 
-  addPadrino(user: Padrino) {
-      return this.http.post(this.url, Padrino);
+  addPadrino(padrino: Padrino) {
+      return this.http.post(this.url, padrino);
   }
 
-  updatePadrino(user: Padrino) {
-      return this.http.put(this.url, user);
+  updatePadrino(padrino: Padrino) {
+      return this.http.put(this.url, padrino);
   }
 
   deletePadrino(id: string) {

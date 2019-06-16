@@ -2,7 +2,8 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { FormGroup, FormBuilder, Validators} from '@angular/forms';
-import { Padrino } from 'src/app/Modelo/dashboard-padrino.model';
+import { Padrino, DatosAuditoriaPadrino } from 'src/app/Modelo/dashboard-padrino.model';
+// tslint:disable-next-line: max-line-length
 import { DatosbasicosPadrino, TrabajoPadrino, DatosContactoPadrino, RedesSocialesPadrino, EstadosPadrinos } from '../../Modelo/dashboard-padrino.model';
 
 @Component({
@@ -20,9 +21,9 @@ export class GestionPadrinoComponent implements OnInit {
     this.form = this.fb.group({
       tipoIdentificacion: null,
       numeroIdentificacion: null,
-      // username: [null, Validators.compose([Validators.required, Validators.minLength(5)])],
-      // password: [null, Validators.compose([Validators.required, Validators.minLength(6)])],
-      datosbasicosPadrino:  this.fb.group({
+      username: [null, Validators.compose([Validators.required, Validators.minLength(5)])],
+      password: [null, Validators.compose([Validators.required, Validators.minLength(6)])],
+      perfilPadrino:  this.fb.group({
         primerNombre: null,
         segundoNombre: null,
         primerApellido: null,
@@ -32,19 +33,19 @@ export class GestionPadrinoComponent implements OnInit {
         genero: null,
         urlFoto: null,
       }),
-      trabajoPadrino: this.fb.group({
+      profesionTrabajo: this.fb.group({
         empresa: null,
         cargo: null,
         profesion: null
       }),
-      datosContactoPadrino: this.fb.group({
+      datosContacto: this.fb.group({
         correoElectronico: null,
         correoElectronicoAlternativo: null,
         telefono: null,
         otroTelefono: null,
         direccionResidencia: null
       }),
-      redesSocialesPadrino: this.fb.group({
+      redesSociales: this.fb.group({
         facebook: null,
         twitter: null,
         google: null
@@ -54,6 +55,9 @@ export class GestionPadrinoComponent implements OnInit {
         estaActivo: null,
         estaEliminado: null,
         fechaRegistro: null
+      }),
+      auditoria: this.fb.group({
+        usuarioLog: 'john.lopez@cigarra.org'
       })
     });
   }
@@ -61,17 +65,16 @@ export class GestionPadrinoComponent implements OnInit {
   ngOnInit() {
     if(this.padrino){
       this.form.setValue(this.padrino);
-    } 
-    else{
+    } else {
       this.padrino = new Padrino();
       this.padrino.perfilPadrino = new DatosbasicosPadrino();
       this.padrino.profesionTrabajo = new TrabajoPadrino();
       this.padrino.datosContacto = new DatosContactoPadrino();
       this.padrino.redesSociales = new RedesSocialesPadrino();
       this.padrino.estados = new EstadosPadrinos();
+      this.padrino.auditoria = new DatosAuditoriaPadrino();
     } 
   }
-
   close(): void {
     this.dialogRef.close();
   }

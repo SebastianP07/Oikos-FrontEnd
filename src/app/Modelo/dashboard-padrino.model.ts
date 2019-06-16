@@ -1,6 +1,8 @@
 export class Padrino {
   tipoIdentificacion: string;
   numeroIdentificacion: string;
+  username: string;
+  password: string; 
   perfilPadrino: DatosbasicosPadrino;
   profesionTrabajo: TrabajoPadrino;
   datosContacto: DatosContactoPadrino;

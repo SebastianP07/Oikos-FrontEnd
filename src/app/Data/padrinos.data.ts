@@ -6,6 +6,8 @@ export class PadrinoData implements InMemoryDbService {
       {
         tipoIdentificacion: 'CC',
         numeroIdentificacion: '1022347504',
+        username: "johnalbh",
+        password: "123",
         perfilPadrino: {
             primerNombre: 'John',
             segundoNombre: 'Alberto',
