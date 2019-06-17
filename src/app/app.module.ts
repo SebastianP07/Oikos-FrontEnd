@@ -12,7 +12,7 @@ import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   wheelPropagation: true,
-  suppressScrollX: true               
+  suppressScrollX: true
 };
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
@@ -37,8 +37,6 @@ import { FullScreenComponent } from './theme/components/fullscreen/fullscreen.co
 import { ApplicationsComponent } from './theme/components/applications/applications.component';
 import { MessagesComponent } from './theme/components/messages/messages.component';
 import { UserMenuComponent } from './theme/components/user-menu/user-menu.component';
-import { DashboardEstudianteComponent } from './Estudiantes/dashboard-estudiante.component';
-import { DashboardPadrinoComponent } from './Padrinos/dashboard-padrino.component';
 import { DashboardPadrinoService } from './Padrinos/dashboard-padrino.service';
 
 import { HttpClientModule } from '@angular/common/http';
@@ -80,9 +78,8 @@ import { GestionEstudianteComponent } from './Estudiantes/gestion-estudiante/ges
     FullScreenComponent,
     ApplicationsComponent,
     MessagesComponent,
-    UserMenuComponent,
-    DashboardEstudianteComponent,
-    GestionEstudianteComponent
+    UserMenuComponent
+  
   ],
   entryComponents:[
     VerticalMenuComponent

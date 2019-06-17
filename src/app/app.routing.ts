@@ -1,4 +1,3 @@
-import { DashboardEstudianteModule } from './Estudiante/dashboard-estudiante.module';
 import { Routes, RouterModule, PreloadAllModules  } from '@angular/router';
 import { ModuleWithProviders } from '@angular/core';
 import { PagesComponent } from './pages/pages.component';
@@ -6,12 +5,12 @@ import { BlankComponent } from './pages/blank/blank.component';
 import { SearchComponent } from './pages/search/search.component';
 import { NotFoundComponent } from './pages/errors/not-found/not-found.component';
 import { ErrorComponent } from './pages/errors/error/error.component';
-import { DashboardEstudianteComponent } from './Estudiantes/dashboard-estudiante.component';
 
 export const routes: Routes = [
     { 
-        path: '', 
+        path: '',
         component: PagesComponent, children: [
+            // tslint:disable-next-line:max-line-length
             { path: '', loadChildren: () => import('./pages/dashboard/dashboard.module').then(m => m.DashboardModule), data: { breadcrumb: 'Dashboard' } },
             { path: 'users', loadChildren: () => import('./pages/users/users.module').then(m => m.UsersModule), data: { breadcrumb: 'Users' } },
             { path: 'ui', loadChildren: () => import('./pages/ui/ui.module').then(m => m.UiModule), data: { breadcrumb: 'UI' } },
@@ -27,7 +26,6 @@ export const routes: Routes = [
             { path: 'dynamic-menu', loadChildren: () => import('./pages/dynamic-menu/dynamic-menu.module').then(m => m.DynamicMenuModule), data: { breadcrumb: 'Dynamic Menu' }  },          
             { path: 'profile', loadChildren: () => import ('./pages/profile/profile.module').then(m => m.ProfileModule), data: { breadcrumb: 'Profile' } }, 
             { path: 'blank', component: BlankComponent, data: { breadcrumb: 'Blank page' } },
-            { path: 'DashboardEstudainte', component: DashboardEstudianteComponent, data: { breadcrumb: 'Dashboard' } },
             { path: 'padrinos', loadChildren: () => import('./Padrinos/dashboard-padrino.module').then(m => m.DashboardPadrinoModule), data: { breadcrumb: 'Padrino' } },
             { path: 'estudiantes', loadChildren: () => import('./Estudiantes/dashboard-estudiante.module').then(m => m.DashboardEstudianteModule), data: { breadcrumb: 'Estudiante' } },
 

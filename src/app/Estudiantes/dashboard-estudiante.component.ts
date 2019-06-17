@@ -1,73 +1,71 @@
 import { AppSettings } from './../app.settings';
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { DatatableComponent } from '@swimlane/ngx-datatable';
+import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { Settings } from '../app.settings.model';
+import { DashboardEstudianteService } from './dashboard-estudiante.service';
+import { Estudiante } from '../Modelo/dashboard-estudiante.model';
+import { MatDialog } from '@angular/material';
+import { GestionEstudianteComponent } from './gestion-estudiante/gestion-estudiante.component';
 
 @Component({
   selector: 'app-dashboard-estudiante',
   templateUrl: './dashboard-estudiante.component.html',
-  styleUrls: ['./dashboard-estudiante.component.scss']
+  styleUrls: ['./dashboard-estudiante.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+  providers: [ DashboardEstudianteService ]
 })
 export class DashboardEstudianteComponent implements OnInit {
-  ngOnInit(): void {
-    throw new Error("Method not implemented.");
-  }
 
-  @ViewChild(DatatableComponent, { static: true }) table: DatatableComponent;
-  editing = {};
-  rows = [];
-  temp = [];
-  selected = [];
-  loadingIndicator: boolean = true;
-  reorderable: boolean = true;
-  columns = [
-    { prop: 'name' },
-    { name: 'Gender' },
-    { name: 'Company' }
-  ];
+
+  public estudiantes: Estudiante[];
+  public searchText: string;
+  public page: any;
   public settings: Settings;
-
-  constructor(public appSettings:AppSettings) {
-    this.settings = this.appSettings.settings; 
-    this.fetch((data) => {
-      this.temp = [...data];
-      this.rows = data;
-      setTimeout(() => { this.loadingIndicator = false; }, 1500);
-    });
+  constructor(public appSettings: AppSettings,
+              public dialog: MatDialog,
+              public estudiantesService: DashboardEstudianteService){
+      this.settings = this.appSettings.settings;
   }
 
-  fetch(data) {
-    const req = new XMLHttpRequest();
-    req.open('GET', 'assets/data/company.json');
-    req.onload = () => {
-      data(JSON.parse(req.response));
-    };
-    req.send();
+  ngOnInit() {
+      this.getPadrinos();
   }
 
-  updateFilter(event) {
-    const val = event.target.value.toLowerCase();
-    const temp = this.temp.filter(function(d) {
-      return d.name.toLowerCase().indexOf(val) !== -1 || !val;
-    });
-    this.rows = temp;
-    this.table.offset = 0;
+  public getPadrinos(): void {
+      this.estudiantes = null;
+      this.estudiantesService.getEstudiantes().subscribe(estudiantes => this.estudiantes = estudiantes);  
+  }
+  public addEstudiante(estudiante: Estudiante){
+      this.estudiantesService.addEstudiante(estudiante).subscribe(estudiante => this.getPadrinos());
+  }
+  public updateEstudiante(estudiante: Estudiante){
+      this.estudiantesService.updateEstudiante(estudiante).subscribe(estudiante => this.getPadrinos());
+  }
+  public deleteEstudiante(estudiante: Estudiante){
+     this.estudiantesService.deleteEstudiante(estudiante.id).subscribe(user => this.getPadrinos());
   }
 
-  updateValue(event, cell, rowIndex) {
-    this.editing[rowIndex + '-' + cell] = false;
-    this.rows[rowIndex][cell] = event.target.value;
-    this.rows = [...this.rows];
+
+  public onPageChanged(event){
+      this.page = event;
+      this.getPadrinos();
+      if (this.settings.fixedHeader){
+          document.getElementById('main-content').scrollTop = 0;
+      } else {
+          document.getElementsByClassName('mat-drawer-content')[0].scrollTop = 0;
+      }
   }
 
-  onSelect({ selected }) {
-    console.log('Select Event', selected, this.selected);
-    this.selected.splice(0, this.selected.length);
-    this.selected.push(...selected);
+  public openUserDialog(estudiante){
+      const dialogRef = this.dialog.open(GestionEstudianteComponent, {
+          data: estudiante
+      });
+
+      dialogRef.afterClosed().subscribe(estudiante => {
+          if (estudiante){
+              (estudiante.id) ? this.updateEstudiante(estudiante) : this.addEstudiante(estudiante);
+          }
+      });
   }
 
-  onActivate(event) {
-    console.log('Activate Event', event);
-  }
 
 }

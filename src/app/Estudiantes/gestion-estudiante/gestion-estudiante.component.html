@@ -1,3 +1,121 @@
-<p>
-  gestion-estudiante works!
-</p>
+<h1 mat-dialog-title><span *ngIf="!estudiante.tipoIdentificacion && !estudiante.numeroIdentificacion">Crear Nuevo</span><span *ngIf="estudiante.tipoIdentificacion && !estudiante.numeroIdentificacion">Editar </span> estudiante</h1>
+<div mat-dialog-content>
+    <form [formGroup]="form" class="user-form">
+        <mat-tab-group class="vertical-tabs">
+            <mat-tab label="Identificacion">
+                <div fxLayout="column" class="form-field-outer">
+                    <mat-form-field class="w-100">
+                        <mat-placeholder>
+                            <mat-icon>person</mat-icon> Usuario</mat-placeholder>
+                        <input matInput formControlName="username" required>
+                        <mat-error *ngIf="form.controls.username.errors?.required">Debe ingresar un Usuario</mat-error>
+                        <mat-error *ngIf="form.controls.username.hasError('minlength')">Nombre de Usuario muy corto, minino 5 letras</mat-error>
+                    </mat-form-field>
+                    <mat-form-field class="w-100">
+                        <mat-placeholder>
+                            <mat-icon>vpn_key</mat-icon> Contraseña</mat-placeholder>
+                        <input matInput formControlName="password" required [type]="passwordHide ? 'password' : 'text'">
+                        <mat-icon matSuffix (click)="passwordHide = !passwordHide">{{passwordHide ? 'visibility' : 'visibility_off'}}</mat-icon>
+                        <mat-error *ngIf="form.controls.password.errors?.required">Contraseña Obligatoria</mat-error>
+                        <mat-error *ngIf="form.controls.password.hasError('minlength')">Tu contraseña debe ser minimo de 6 caracteres</mat-error>
+                    </mat-form-field>
+                    <mat-form-field class="w-100">
+                        <mat-placeholder>
+                            <mat-icon>vpn_key</mat-icon> Tipo Identificación</mat-placeholder>
+                        <input matInput formControlName="tipoIdentificacion" required>
+                    </mat-form-field>
+                    <mat-form-field class="w-100">
+                        <mat-placeholder>
+                            <mat-icon>person</mat-icon> Número de Identificación</mat-placeholder>
+                        <input matInput formControlName="numeroIdentificacion" required>
+                    </mat-form-field>
+
+                </div>
+            </mat-tab>
+            <mat-tab label="Personal" formGroupName="perfilEstudiante">
+                <div fxLayout="column" class="form-field-outer">
+                    <mat-form-field class="w-100">
+                        <input matInput placeholder="Primer Nombre" formControlName="primerNombre">
+                    </mat-form-field>
+                    <mat-form-field class="w-100">
+                        <input matInput placeholder="Segundo Nombre" formControlName="segundoNombre">
+                    </mat-form-field>
+                    <mat-form-field class="w-100">
+                        <input matInput placeholder="Primer Apellido" formControlName="primerApellido">
+                    </mat-form-field>
+                    <mat-form-field class="w-100">
+                        <input matInput placeholder="Segundo Apellido" formControlName="segundoApellido">
+                    </mat-form-field>
+                    <mat-form-field class="w-100">
+                        <input matInput [matDatepicker]="fechaNacimiento" placeholder="Fecha de Nacimiento" formControlName="fechaNacimiento">
+                        <mat-datepicker-toggle matSuffix [for]="fechaNacimiento"></mat-datepicker-toggle>
+                        <mat-datepicker #fechaNacimiento></mat-datepicker>
+                    </mat-form-field>
+                    <mat-radio-group formControlName="genero">
+                        <mat-radio-button value="Masculino" labelPosition="before">Masculino</mat-radio-button>
+                        <mat-radio-button value="Femenino" labelPosition="before">Femenino</mat-radio-button>
+                    </mat-radio-group>
+                    <mat-form-field class="w-100">
+                        <input matInput placeholder="Image url" formControlName="urlFoto">
+                    </mat-form-field>
+                </div>
+            </mat-tab>
+            <mat-tab label="Datos Trabajo" formGroupName="perfilOcio">
+                <div fxLayout="column" class="form-field-outer">
+                    <mat-form-field class="w-100">
+                        <input matInput placeholder="Empresa" formControlName="empresa">
+                    </mat-form-field>
+                    <mat-form-field class="w-100">
+                        <input matInput placeholder="Cargo" formControlName="cargo">
+                    </mat-form-field>
+                    <mat-form-field class="w-100">
+                        <input matInput placeholder="Profesion" formControlName="profesion">
+                    </mat-form-field>
+                </div>
+            </mat-tab>
+            <mat-tab label="Dastos de Contacto" formGroupName="datosContacto">
+                <div fxLayout="column" class="form-field-outer">
+                    <mat-form-field class="w-100">
+                        <input matInput placeholder="Correo Electrónico" formControlName="correoElectronico">
+                    </mat-form-field>
+                    <mat-form-field class="w-100">
+                        <input matInput placeholder="Correo Electrónico Alternativo" formControlName="correoElectronicoAlternativo">
+                    </mat-form-field>
+                    <mat-form-field class="w-100">
+                        <input matInput placeholder="Phone" formControlName="telefono">
+                    </mat-form-field>
+                    <mat-form-field class="w-100">
+                        <input matInput placeholder="Address" formControlName="otroTelefono">
+                    </mat-form-field>
+                    <mat-form-field class="w-100">
+                        <input matInput placeholder="Address" formControlName="direccionResidencia">
+                    </mat-form-field>
+                </div>
+            </mat-tab>
+            <mat-tab label="Social life" formGroupName="redesSociales">
+                <div fxLayout="column" class="form-field-outer">
+                    <mat-form-field class="w-100">
+                        <input matInput placeholder="Facebook" formControlName="facebook">
+                    </mat-form-field>
+                    <mat-form-field class="w-100">
+                        <input matInput placeholder="Twitter" formControlName="twitter">
+                    </mat-form-field>
+                    <mat-form-field class="w-100">
+                        <input matInput placeholder="Google" formControlName="google">
+                    </mat-form-field>
+                </div>
+            </mat-tab>
+            <mat-tab label="Settings" formGroupName="estados">
+                <div fxLayout="column" class="form-field-outer">
+                    <mat-checkbox formControlName="estaActivo">Active</mat-checkbox>
+                    <mat-checkbox formControlName="estaEliminado">Blocked</mat-checkbox>
+                    <p *ngIf="estudiante.numeroIdentificacion"><span>Registration date:</span> <i>{{estudiante.estados.fechaRegistro| date:"dd MMMM, yyyy 'at' HH:mm" }}</i></p>
+                </div>
+            </mat-tab>
+        </mat-tab-group>
+    </form>
+</div>
+<div mat-dialog-actions fxLayout="row" fxLayoutAlign="space-between center">
+    <button mat-raised-button color="primary" [mat-dialog-close]="form.value" [disabled]="!form.valid"><span *ngIf="!estudiante.numeroIdentificacion">Guardar</span><span *ngIf="estudiante.numeroIdentificacion">Actualizar</span></button>
+    <button mat-raised-button color="warn" (click)="close()">Cancelar</button>
+</div>

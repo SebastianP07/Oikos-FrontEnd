@@ -57,7 +57,7 @@ export class DashboardPadrinoComponent implements OnInit {
   }
 
   public openUserDialog(padrino){
-      let dialogRef = this.dialog.open(GestionPadrinoComponent, {
+      const dialogRef = this.dialog.open(GestionPadrinoComponent, {
           data: padrino
       });
 

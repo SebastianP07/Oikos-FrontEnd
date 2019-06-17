@@ -1,72 +1,188 @@
-<div fxLayout="column">
-  <div class="flex-p"> 
-      <div fxLayout="column" class="mat-elevation-z8">           
-          <mat-form-field class="p-1">
-              <input matInput placeholder="Type to filter the name column..." (keyup)="updateFilter($event)">
-          </mat-form-field>
-      </div>
-      <ngx-datatable
-          #table
-          class="material"
-          [headerHeight]="50"
-          [limit]="10"
-          [columnMode]="'force'"
-          [footerHeight]="50"
-          [rowHeight]="'auto'"
-          [rows]="rows"
-          [loadingIndicator]="loadingIndicator"
-          [selected]="selected"
-          [selectionType]="'checkbox'"
-          (activate)="onActivate($event)"
-          (select)='onSelect($event)'>
-          <ngx-datatable-column
-              [width]="30"
-              [sortable]="false"
-              [canAutoResize]="false"
-              [draggable]="true"
-              [resizeable]="false"
-              [headerCheckboxable]="true"
-              [checkboxable]="true">
-          </ngx-datatable-column>
-          <ngx-datatable-column name="Name">
-            <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
-              <span
-                title="Double click to edit"
-                (dblclick)="editing[rowIndex + '-name'] = true"
-                *ngIf="!editing[rowIndex + '-name']">
-                {{value}}
-              </span>
-              <input
-                autofocus
-                (blur)="updateValue($event, 'name', rowIndex)"
-                *ngIf="editing[rowIndex+ '-name']"
-                type="text"
-                [value]="value"
-              />
-            </ng-template>
-          </ngx-datatable-column>
-          <ngx-datatable-column name="Gender">
-            <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-row="row" let-value="value">
-              <span
-                title="Double click to edit"
-                (dblclick)="editing[rowIndex + '-gender'] = true"
-                *ngIf="!editing[rowIndex + '-gender']">
-                {{value}}
-              </span>
-              <select
-                *ngIf="editing[rowIndex + '-gender']"
-                (change)="updateValue($event, 'gender', rowIndex)"
-                [value]="value">
-                <option value="male">Male</option>
-                <option value="female">Female</option>
-              </select>
-            </ng-template>
-          </ngx-datatable-column>
-          <ngx-datatable-column name="Company">
-            <ng-template ngx-datatable-cell-template let-value="value">
-              {{value}}
-            </ng-template>
-          </ngx-datatable-column>
-      </ngx-datatable>
-  </div>
+<div fxLayout="row" fxLayoutAlign="space-between center" class="flex-p">
+    <div fxLayout="row">
+        <mat-button-toggle-group #controls="matButtonToggleGroup" appearance="legacy">
+            <mat-button-toggle value="add" (click)="openUserDialog(null)">
+                <mat-icon>person_add</mat-icon>
+            </mat-button-toggle>
+            <mat-button-toggle value="search">
+                <mat-icon>search</mat-icon>
+            </mat-button-toggle>
+        </mat-button-toggle-group>
+    </div>
+    <form class="user-search" [class.show]="controls.value == 'search'">
+        <mat-form-field class="user-search-input">
+            <input matInput placeholder="Search user by name..." [(ngModel)]="searchText" name="search">
+        </mat-form-field>
+    </form>
+    <div fxLayout="row" fxLayoutAlign="space-between center">
+        <mat-button-toggle-group #viewType="matButtonToggleGroup" appearance="legacy">
+            <mat-button-toggle value="grid">
+                <mat-icon>view_module</mat-icon>
+            </mat-button-toggle>
+            <mat-button-toggle value="list" checked="true">
+                <mat-icon>view_list</mat-icon>
+            </mat-button-toggle>
+        </mat-button-toggle-group>
+    </div>
+</div>
+
+<div *ngIf="viewType.value == 'grid'" fxLayout="row wrap">
+    <div *ngFor="let estudiante of estudiantes | paginate: { itemsPerPage: 6, currentPage: page }" fxFlex="100" fxFlex.gt-md="33.3" fxFlex.md="50" class="flex-p">
+        <mat-card class="p-0">
+            <div class="bg-primary" fxLayout="row" fxLayoutAlign="space-between center">
+                <h3 *ngIf="!estudiante.estados.estaEliminado" class="user-name">
+                    {{estudiante.perfilestudiante.primerNombre}} {{estudiante.perfilestudiante.segundoNombre}} {{estudiante.perfilestudiante.primerApellido}} {{estudiante.perfilestudiante.segundoApellido}}
+                </h3>
+                <h3 *ngIf="estudiante.estados.estaEliminado" class="user-name">User blocked</h3>
+                <button mat-icon-button [matMenuTriggerFor]="menu" #menuTrigger="matMenuTrigger">
+                    <mat-icon>more_vert</mat-icon>
+                </button>
+            </div>
+            <mat-menu #menu="matMenu" xPosition="before" overlapTrigger="true">
+                <span (mouseleave)="menuTrigger.closeMenu()">
+                    <button mat-menu-item (click)="openUserDialog(estudiante)">
+                        <mat-icon>mode_edit</mat-icon>
+                        <span>Editar</span>
+                </button>
+                <button mat-menu-item (click)="deleteEstudiante(estudiante)">
+                        <mat-icon>delete</mat-icon>
+                        <span>Eliminar</span>
+                    </button>
+                </span>
+            </mat-menu>
+            <div class="user-content" fxLayout="row" fxLayoutAlign="space-around center">
+                <div fxFlex="30" fxLayout="column" fxLayoutAlign="center center">
+                    <div class="user-img">
+                        <img *ngIf="estudiante.perfilEstudiante.urlFoto" [src]="estudiante.perfilEstudiante.urlFoto" class="transition-2" [class.blocked]="estudiante.estados.estaEliminado">
+                        <img *ngIf="!estudiante.perfilEstudiante.urlFoto" src="assets/img/users/default-user.jpg" class="transition-2" [class.blocked]="estudiante.estados.estaEliminado">
+                        <mat-icon *ngIf="estudiante.estados.estaEliminado" class="warn-color">block</mat-icon>
+                    </div>
+                    <div class="user-social">
+                        <mat-slide-toggle color="primary" [checked]="estudiante.estados.estaEliminado" (change)="estudiante.estados.estaEliminado = !estudiante.estados.estaEliminado"></mat-slide-toggle>
+                    </div>
+                </div>
+                <div fxFlex="70" fxLayout="column" class="user-details transition-2" [class.blocked]="estudiante.estados.estaEliminado">
+
+                    <p fxLayout="row" fxLayoutAlign="start center">
+                        <mat-icon class="muted-text">mail_outline</mat-icon>
+                        <span>{{estudiante.datosContacto.correoElectronico}}</span>
+                    </p>
+                    <p fxLayout="row" fxLayoutAlign="start center">
+                        <mat-icon class="muted-text">call</mat-icon>
+                        <span>{{estudiante.datosContacto.correoElectronicoAlternativo}}</span>
+                    </p>
+                    <p fxLayout="row" fxLayoutAlign="start center">
+                        <mat-icon class="muted-text">location_on</mat-icon>
+                        <span>{{estudiante.datosContacto.telefono}}</span>
+                    </p>
+                    <p fxLayout="row" fxLayoutAlign="start center">
+                        <mat-icon class="muted-text">location_on</mat-icon>
+                        <span>{{estudiante.datosContacto.otroTelefono}}</span>
+                    </p>
+                    <p fxLayout="row" fxLayoutAlign="start center">
+                        <mat-icon class="muted-text">location_on</mat-icon>
+                        <span>{{estudiante.datosContacto.direccionResidencia}}</span>
+                    </p>
+                    <p fxLayout="row" fxLayoutAlign="start center">
+                        <mat-icon class="muted-text">date_range</mat-icon>
+                        <span>Joined {{estudiante.estados.fechaRegistro | date:"dd MMMM, yyyy 'at' HH:mm"}}</span>
+                    </p>
+                </div>
+            </div>
+        </mat-card>
+    </div>
+</div>
+
+<div *ngIf="viewType.value == 'list'" fxLayout="row wrap">
+    <div *ngFor="let estudiante of estudiantes  | paginate: { itemsPerPage: 6, currentPage: page }" fxFlex="100" class="flex-p">
+        <mat-card class="p-0">
+            <div class="bg-primary" fxLayout="row" fxLayoutAlign="space-between center">
+                <h3 *ngIf="!estudiante.estados.estaEliminado" class="user-name">
+                    {{estudiante.perfilEstudiante.primerNombre}} {{estudiante.perfilEstudiante.segundoNombre}} {{estudiante.perfilEstudiante.primerApellido}} {{estudiante.perfilEstudiante.segundoApellido}}
+                </h3>
+                <h3 *ngIf="estudiante.estados.estaEliminado" class="user-name">User blocked</h3>
+                <button mat-icon-button [matMenuTriggerFor]="menu" #menuTrigger="matMenuTrigger">
+                    <mat-icon>more_vert</mat-icon>
+                </button>
+            </div>
+            <mat-menu #menu="matMenu" xPosition="before" overlapTrigger="true">
+                <span (mouseleave)="menuTrigger.closeMenu()">
+                    <button mat-menu-item (click)="openUserDialog(estudiante)">
+                        <mat-icon>mode_edit</mat-icon>
+                        <span>Editar</span>
+                </button>
+                <button mat-menu-item (click)="deleteEstudiante(estudiante)">
+                        <mat-icon>delete</mat-icon>
+                        <span>Eliminar</span>
+                    </button>
+                </span>
+            </mat-menu>
+            <div class="user-content" fxLayout="row" fxLayoutAlign="space-around center">
+                <div fxFlex="20" fxFlex.xs="30" fxLayout="column" fxLayoutAlign="center center">
+                    <div class="user-img">
+                        <img *ngIf="estudiante.perfilEstudiante.urlFoto" [src]="estudiante.perfilEstudiante.urlFoto" class="transition-2" [class.blocked]="estudiante.estados.estaEliminado">
+                        <img *ngIf="!estudiante.perfilEstudiante.urlFoto" src="assets/img/users/default-user.jpg" class="transition-2" [class.blocked]="estudiante.estados.estaEliminado">
+                        <mat-icon *ngIf="estudiante.estados.estaEliminado" class="warn-color">block</mat-icon>
+                    </div>
+                    <div class="user-social">
+                        <mat-slide-toggle color="primary" [checked]="estudiante.estados.estaEliminado" (change)="estudiante.estados.estaEliminado = !estudiante.estados.estaEliminado"></mat-slide-toggle>
+                    </div>
+                </div>
+                <div fxFlex="80" fxFlex.xs="70" fxLayout="row" fxLayout.xs="column" class="user-details transition-2" [class.blocked]="estudiante.estados.estaEliminado">
+                    <div fxFlex="30" fxFlex.xs="100" fxLayout="column">
+                        <p fxLayout="row" fxLayoutAlign="start center">
+                            <mat-icon class="muted-text">card_membership</mat-icon>
+                            <span>{{estudiante.perfilOcio.hobby1}}</span>
+                        </p>
+                        <p fxLayout="row" fxLayoutAlign="start center">
+                            <mat-icon class="muted-text">card_membership</mat-icon>
+                            <span>{{estudiante.perfilOcio.hobby2}}</span>
+                        </p>
+                        <p fxLayout="row" fxLayoutAlign="start center">
+                            <mat-icon class="muted-text">card_membership</mat-icon>
+                            <span>{{estudiante.perfilOcio.hobby3}}</span>
+                        </p>
+                    </div>
+                    <div fxFlex="30" fxFlex.xs="100" fxLayout="column">
+                        <p fxLayout="row" fxLayoutAlign="start center">
+                            <mat-icon class="muted-text">mail_outline</mat-icon>
+                            <span>{{estudiante.datosContacto.correoElectronico}}</span>
+                        </p>
+                        <p fxLayout="row" fxLayoutAlign="start center">
+                            <mat-icon class="muted-text">call</mat-icon>
+                            <span>{{estudiante.datosContacto.correoElectronicoAlternativo}}</span>
+                        </p>
+                        <p fxLayout="row" fxLayoutAlign="start center">
+                            <mat-icon class="muted-text">location_on</mat-icon>
+                            <span>{{estudiante.datosContacto.telefono}}</span>
+                        </p>
+                        <p fxLayout="row" fxLayoutAlign="start center">
+                            <mat-icon class="muted-text">location_on</mat-icon>
+                            <span>{{estudiante.datosContacto.otroTelefono}}</span>
+                        </p>
+                        <p fxLayout="row" fxLayoutAlign="start center">
+                            <mat-icon class="muted-text">location_on</mat-icon>
+                            <span>{{estudiante.datosContacto.direccionResidencia}}</span>
+                        </p>
+                        <p fxLayout="row" fxLayoutAlign="start center">
+                            <mat-icon class="muted-text">date_range</mat-icon>
+                            <span>Fecha Registro: {{estudiante.estados.fechaRegistro | date:"dd MMMM, yyyy 'at' HH:mm"}}</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </mat-card>
+    </div>
+</div>
+
+<div *ngIf="estudiantes" fxLayout="row wrap">
+    <div fxFlex="100" class="flex-p">
+        <mat-card class="p-0 text-center">
+            <pagination-controls class="gradus-pagination" autoHide="true" maxSize="3" (pageChange)="onPageChanged($event)"></pagination-controls>
+        </mat-card>
+    </div>
+</div>
+
+<div *ngIf="!estudiantes" fxLayout="column" fxLayoutAlign="center center" class="user-spinner">
+    <mat-spinner color="primary"></mat-spinner>
 </div>
