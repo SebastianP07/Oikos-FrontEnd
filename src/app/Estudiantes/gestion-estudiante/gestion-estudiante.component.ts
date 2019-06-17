@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Estudiante, Estados, DatosAuditoria, RedesSociales, DatosContacto, PerfilOcio, Datosbasicos } from '../../Modelo/dashboard-estudiante.model';
-import { MatDialogRef } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 @Component({
   selector: 'app-gestion-estudiante',

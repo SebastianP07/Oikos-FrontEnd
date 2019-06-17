@@ -6,21 +6,6 @@
                 <div fxLayout="column" class="form-field-outer">
                     <mat-form-field class="w-100">
                         <mat-placeholder>
-                            <mat-icon>person</mat-icon> Usuario</mat-placeholder>
-                        <input matInput formControlName="username" required>
-                        <mat-error *ngIf="form.controls.username.errors?.required">Debe ingresar un Usuario</mat-error>
-                        <mat-error *ngIf="form.controls.username.hasError('minlength')">Nombre de Usuario muy corto, minino 5 letras</mat-error>
-                    </mat-form-field>
-                    <mat-form-field class="w-100">
-                        <mat-placeholder>
-                            <mat-icon>vpn_key</mat-icon> Contraseña</mat-placeholder>
-                        <input matInput formControlName="password" required [type]="passwordHide ? 'password' : 'text'">
-                        <mat-icon matSuffix (click)="passwordHide = !passwordHide">{{passwordHide ? 'visibility' : 'visibility_off'}}</mat-icon>
-                        <mat-error *ngIf="form.controls.password.errors?.required">Contraseña Obligatoria</mat-error>
-                        <mat-error *ngIf="form.controls.password.hasError('minlength')">Tu contraseña debe ser minimo de 6 caracteres</mat-error>
-                    </mat-form-field>
-                    <mat-form-field class="w-100">
-                        <mat-placeholder>
                             <mat-icon>vpn_key</mat-icon> Tipo Identificación</mat-placeholder>
                         <input matInput formControlName="tipoIdentificacion" required>
                     </mat-form-field>
@@ -60,16 +45,16 @@
                     </mat-form-field>
                 </div>
             </mat-tab>
-            <mat-tab label="Datos Trabajo" formGroupName="perfilOcio">
+            <mat-tab label="Hobby" formGroupName="perfilOcio">
                 <div fxLayout="column" class="form-field-outer">
                     <mat-form-field class="w-100">
-                        <input matInput placeholder="Empresa" formControlName="empresa">
+                        <input matInput placeholder="Hobby 1" formControlName="hobby1">
                     </mat-form-field>
                     <mat-form-field class="w-100">
-                        <input matInput placeholder="Cargo" formControlName="cargo">
+                        <input matInput placeholder="Hobby 2 " formControlName="hobby2">
                     </mat-form-field>
                     <mat-form-field class="w-100">
-                        <input matInput placeholder="Profesion" formControlName="profesion">
+                        <input matInput placeholder="Hobby 3" formControlName="hobby3">
                     </mat-form-field>
                 </div>
             </mat-tab>
