@@ -42,6 +42,7 @@ import { DashboardPadrinoComponent } from './Padrinos/dashboard-padrino.componen
 import { DashboardPadrinoService } from './Padrinos/dashboard-padrino.service';
 
 import { HttpClientModule } from '@angular/common/http';
+import { GestionEstudianteComponent } from './Estudiantes/gestion-estudiante/gestion-estudiante.component';
 
 
 @NgModule({
@@ -80,7 +81,8 @@ import { HttpClientModule } from '@angular/common/http';
     ApplicationsComponent,
     MessagesComponent,
     UserMenuComponent,
-    DashboardEstudianteComponent
+    DashboardEstudianteComponent,
+    GestionEstudianteComponent
   ],
   entryComponents:[
     VerticalMenuComponent

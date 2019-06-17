@@ -16,10 +16,10 @@
     </form>
     <div fxLayout="row" fxLayoutAlign="space-between center">
         <mat-button-toggle-group #viewType="matButtonToggleGroup" appearance="legacy">            
-            <mat-button-toggle value="grid" checked="true">
+            <mat-button-toggle value="grid" >
                 <mat-icon>view_module</mat-icon>
             </mat-button-toggle>
-            <mat-button-toggle value="list">
+            <mat-button-toggle value="list" checked="true">
                 <mat-icon>view_list</mat-icon>
             </mat-button-toggle>           
         </mat-button-toggle-group>
@@ -45,9 +45,9 @@
                         <mat-icon>mode_edit</mat-icon>
                         <span>Editar</span>
                     </button>
-                    <button mat-menu-item (click)="deleteUser(padrino);">
+                    <button mat-menu-item (click)="deletePadrino(padrino)">
                         <mat-icon>delete</mat-icon>
-                        <span>Delete</span>
+                        <span>Eliminar</span>
                     </button>
                 </span>
             </mat-menu>
@@ -109,13 +109,13 @@
             </div>
             <mat-menu #menu="matMenu" xPosition="before"  overlapTrigger="true">
                 <span (mouseleave)="menuTrigger.closeMenu()">
-                    <button mat-menu-item (click)="openUserDialog(user);">
+                    <button mat-menu-item (click)="openUserDialog(padrino)">
                         <mat-icon>mode_edit</mat-icon>
-                        <span>Edit</span>
+                        <span>Editar</span>
                     </button>
-                    <button mat-menu-item (click)="deleteUser(user);">
+                    <button mat-menu-item (click)="deletePadrino(padrino)">
                         <mat-icon>delete</mat-icon>
-                        <span>Delete</span>
+                        <span>Eliminar</span>
                     </button>
                 </span>
             </mat-menu>

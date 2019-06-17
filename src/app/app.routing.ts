@@ -1,13 +1,12 @@
+import { DashboardEstudianteModule } from './Estudiante/dashboard-estudiante.module';
 import { Routes, RouterModule, PreloadAllModules  } from '@angular/router';
 import { ModuleWithProviders } from '@angular/core';
-
 import { PagesComponent } from './pages/pages.component';
 import { BlankComponent } from './pages/blank/blank.component';
 import { SearchComponent } from './pages/search/search.component';
 import { NotFoundComponent } from './pages/errors/not-found/not-found.component';
 import { ErrorComponent } from './pages/errors/error/error.component';
 import { DashboardEstudianteComponent } from './Estudiantes/dashboard-estudiante.component';
-import { DashboardPadrinoComponent } from './Padrinos/dashboard-padrino.component';
 
 export const routes: Routes = [
     { 
@@ -30,6 +29,7 @@ export const routes: Routes = [
             { path: 'blank', component: BlankComponent, data: { breadcrumb: 'Blank page' } },
             { path: 'DashboardEstudainte', component: DashboardEstudianteComponent, data: { breadcrumb: 'Dashboard' } },
             { path: 'padrinos', loadChildren: () => import('./Padrinos/dashboard-padrino.module').then(m => m.DashboardPadrinoModule), data: { breadcrumb: 'Padrino' } },
+            { path: 'estudiantes', loadChildren: () => import('./Estudiantes/dashboard-estudiante.module').then(m => m.DashboardEstudianteModule), data: { breadcrumb: 'Estudiante' } },
 
             { path: 'search', component: SearchComponent, data: { breadcrumb: 'Search' } }
         ]

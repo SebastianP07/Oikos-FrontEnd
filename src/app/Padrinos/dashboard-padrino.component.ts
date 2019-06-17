@@ -1,3 +1,4 @@
+import { map } from 'rxjs/operators';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Padrino } from '../Modelo/dashboard-padrino.model';
 import { MatDialog } from '@angular/material';
@@ -40,7 +41,8 @@ export class DashboardPadrinoComponent implements OnInit {
       this.padrinosService.updatePadrino(padrino).subscribe(padrino => this.getPadrinos());
   }
   public deletePadrino(padrino: Padrino){
-     this.padrinosService.deletePadrino(padrino.numeroIdentificacion).subscribe(user => this.getPadrinos());
+     console.log('iD', padrino.id);
+     this.padrinosService.deletePadrino(padrino.id).subscribe(user => this.getPadrinos());
   }
 
 
@@ -61,7 +63,7 @@ export class DashboardPadrinoComponent implements OnInit {
 
       dialogRef.afterClosed().subscribe(padrino => {
           if (padrino){
-              (padrino.numeroIdentificacion && padrino.tipoIdentificacion) ? this.updatePadrino(padrino) : this.addPadrino(padrino);
+              (padrino.id) ? this.updatePadrino(padrino) : this.addPadrino(padrino);
           }
       });
   }

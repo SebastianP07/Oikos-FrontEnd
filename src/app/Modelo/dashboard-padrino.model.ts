@@ -1,4 +1,5 @@
 export class Padrino {
+  id: number;
   tipoIdentificacion: string;
   numeroIdentificacion: string;
   username: string;

@@ -1,4 +1,4 @@
-<h1 mat-dialog-title><span *ngIf="!padrino.tipoIdentificacion && !padrino.numeroIdentificacion">Add</span><span *ngIf="padrino.tipoIdentificacion && !padrino.numeroIdentificacion">Editar </span> Padrino</h1>
+<h1 mat-dialog-title><span *ngIf="!padrino.tipoIdentificacion && !padrino.numeroIdentificacion">Crear Nuevo</span><span *ngIf="padrino.tipoIdentificacion && !padrino.numeroIdentificacion">Editar </span> Padrino</h1>
 <div mat-dialog-content>
     <form [formGroup]="form" class="user-form">      
         <mat-tab-group class="vertical-tabs">
@@ -112,6 +112,6 @@
     </form>
 </div>
 <div mat-dialog-actions fxLayout="row" fxLayoutAlign="space-between center">
-    <button mat-raised-button color="primary" [mat-dialog-close]="form.value" [disabled]="!form.valid"><span *ngIf="!padrino.numeroIdentificacion">Save</span><span *ngIf="padrino.numeroIdentificacion">Update</span></button>
-    <button mat-raised-button color="warn" (click)="close()">Cancel</button>
+    <button mat-raised-button color="primary" [mat-dialog-close]="form.value" [disabled]="!form.valid"><span *ngIf="!padrino.numeroIdentificacion">Guardar</span><span *ngIf="padrino.numeroIdentificacion">Actualizar</span></button>
+    <button mat-raised-button color="warn" (click)="close()">Cancelar</button>
 </div>

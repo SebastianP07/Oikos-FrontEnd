@@ -3,7 +3,6 @@ export class PadrinoData implements InMemoryDbService {
   createDb() {
     const padrinos = [
       {
-        id: 1,
         tipoIdentificacion: 'CC',
         numeroIdentificacion: '1022347504',
         username: 'johnalbh',

@@ -18,6 +18,7 @@ export class GestionPadrinoComponent implements OnInit {
               @Inject(MAT_DIALOG_DATA) public padrino: Padrino,
               public fb: FormBuilder) {
     this.form = this.fb.group({
+      id: null,
       tipoIdentificacion: null,
       numeroIdentificacion: null,
       username: [null, Validators.compose([Validators.required, Validators.minLength(5)])],
