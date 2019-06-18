@@ -1,7 +1,7 @@
 import { Menu } from './menu.model';
 
 export const verticalMenuItems = [ 
-    new Menu (1, 'Dashboard', '/', null, 'dashboard', null, false, 0),
+    new Menu (1, 'Dashboard', '/dashboard', null, 'dashboard', null, false, 0),
     new Menu (2, 'Padrinos', '/padrinos', null, 'supervisor_account', null, false, 0), 
     new Menu (2, 'Estudiantes', '/estudiantes', null, 'supervisor_account', null, false, 0), 
     new Menu (15, 'Configuración', '/', null, 'settings', null, true, 0),
