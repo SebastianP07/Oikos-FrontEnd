@@ -31,7 +31,7 @@
         <mat-card class="p-0">
             <div class="bg-primary" fxLayout="row" fxLayoutAlign="space-between center">
                 <h3 *ngIf="!estudiante.estados.estaEliminado" class="user-name">
-                    {{estudiante.perfilestudiante.primerNombre}} {{estudiante.perfilestudiante.segundoNombre}} {{estudiante.perfilestudiante.primerApellido}} {{estudiante.perfilestudiante.segundoApellido}}
+                    {{estudiante.perfilEstudiante.primerNombre}} {{estudiante.perfilEstudiante.segundoNombre}} {{estudiante.perfilEstudiante.primerApellido}} {{estudiante.perfilEstudiante.segundoApellido}}
                 </h3>
                 <h3 *ngIf="estudiante.estados.estaEliminado" class="user-name">User blocked</h3>
                 <button mat-icon-button [matMenuTriggerFor]="menu" #menuTrigger="matMenuTrigger">
